@@ -1,15 +1,12 @@
 import React from "react";
-import Cookkies from "universal-cookie";
+import Cookies from "universal-cookie";
 import { ChannelList, useChatContext } from "stream-chat-react";
-import {
-  ChannelSearch,
-  TeamChannleList,
-  TeamChannelPreview,
-} from "stream-chat-react";
-import ChannelSearchh from "./ChannelSearch";
+// import { ChannelSearch, TeamChannelList, TeamChannelPreview } from "./";
+import TeamChannelList from "./TeamChannelList";
+import ChannelSearch from "./ChannelSearch";
+import TeamChannelPreview from "./TeamChannelPreview";
 import HospitalIcon from "../assets/hospital.png";
 import Logout from "../assets/logout.png";
-
 const Sidebar = () => (
   <div className="channel-list__sidebar">
     <div className="channel-list__sidebar__icon1">
@@ -36,11 +33,25 @@ const ChannelListContainer = () => {
       <Sidebar />
       <div className="channel-list__list__wrapper">
         <CompanyHeader />
-        <ChannelSearchh />
+        <ChannelSearch />
         <ChannelList
           filters={{}}
           channelRenderFilterFn={() => {}}
-          List={(listProps) => <TeamChannleList {...listProps} />}
+          List={(listProps) => <TeamChannelList {...listProps} type="team" />}
+          Preview={(previewPropos) => {
+            <TeamChannelPreview {...previewPropos} type="team" />;
+          }}
+        />
+
+        <ChannelList
+          filters={{}}
+          channelRenderFilterFn={() => {}}
+          List={(listProps) => (
+            <TeamChannelList {...listProps} type="messaging" />
+          )}
+          Preview={(previewPropos) => {
+            <TeamChannelPreview {...previewPropos} type="messaging" />;
+          }}
         />
       </div>
     </>
